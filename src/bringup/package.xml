@@ -12,6 +12,10 @@
   <exec_depend>ros2_laser_scan_merger</exec_depend>
   <exec_depend>ros2_laser_scan_matcher</exec_depend>
   <exec_depend>sllidar_ros2</exec_depend>
+  
+  <depend>rclcpp</depend>
+  <depend>tf2_ros</depend>
+  <depend>geometry_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

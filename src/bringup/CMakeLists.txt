@@ -10,6 +10,17 @@ find_package(ament_cmake REQUIRED)
 find_package(ros2_laser_scan_merger REQUIRED)
 find_package(ros2_laser_scan_matcher REQUIRED)
 find_package(sllidar_ros2 REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(geometry_msgs REQUIRED)
+
+add_executable(settf src/settf.cpp)
+ament_target_dependencies(
+  settf 
+  rclcpp 
+  tf2_ros 
+  geometry_msgs
+  )
 
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME})
