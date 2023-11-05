@@ -9,7 +9,7 @@ int main(int argc, char * argv[])
     auto node = rclcpp::Node::make_shared("static_tf2_broadcaster");
 
     auto static_broadcaster = std::make_shared<tf2_ros::StaticTransformBroadcaster>(node);
-
+    
     geometry_msgs::msg::TransformStamped static_transformStamped;
     while(rclcpp::ok())
     {    
