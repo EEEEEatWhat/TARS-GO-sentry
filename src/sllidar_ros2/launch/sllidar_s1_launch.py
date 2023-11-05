@@ -10,13 +10,14 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 
+
 def generate_launch_description():
     channel_type =  LaunchConfiguration('channel_type', default='serial')
     serial_port = LaunchConfiguration('serial_port', default='/dev/ttyUSB0')
     serial_port1 = LaunchConfiguration('serial_port', default='/dev/ttyUSB1')
     serial_baudrate = LaunchConfiguration('serial_baudrate', default='256000') 
     frame_id = LaunchConfiguration('frame_id', default='laser')
-    frame_id1 = LaunchConfiguration('frame_id', default='laser1')
+    frame_id1 = LaunchConfiguration('frame_id', default='laser')
     inverted = LaunchConfiguration('inverted', default='false')
     angle_compensate = LaunchConfiguration('angle_compensate', default='true')
 

@@ -11,7 +11,7 @@ public:
       serial_(io_service_)
   {
     // 串口配置
-    std::string port = "/dev/ttyUSB2"; // 串口设备路径
+    std::string port = "/dev/ttyACM0"; // 串口设备路径
     int baud_rate = 115200; // 波特率
     
     // 打开串口

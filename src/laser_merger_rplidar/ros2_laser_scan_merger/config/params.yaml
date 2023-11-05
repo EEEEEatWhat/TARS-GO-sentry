@@ -1,22 +1,22 @@
 /ros2_laser_scan_merger:
   ros__parameters:
-    laser1Alpha: 45.0
+    laser1Alpha: 0.0
     laser1AngleMax: 181.0
     laser1AngleMin: -181.0
     laser1B: 0
     laser1G: 0
     laser1R: 255
-    laser1XOff: -0.45
-    laser1YOff: 0.24
+    laser1XOff: 0.0
+    laser1YOff: 0.0
     laser1ZOff: 0.0
-    laser2Alpha: 225.0
+    laser2Alpha: 0.0
     laser2AngleMax: 181.0
     laser2AngleMin: -181.0
     laser2B: 255
     laser2G: 0
     laser2R: 0
-    laser2XOff: 0.315
-    laser2YOff: -0.24
+    laser2XOff: 0.0
+    laser2YOff: 0.0
     laser2ZOff: 0.0
     pointCloudTopic: cloud_in
     pointCloutFrameId: laser
@@ -36,8 +36,8 @@
 /pointcloud_to_laserscan:
   ros__parameters:
     angle_increment: 0.0087
-    angle_max: 1.5708
-    angle_min: -1.5708
+    angle_max: 3.1415926
+    angle_min: -3.1415926
     inf_epsilon: 1.0
     max_height: 1.0
     min_height: 0.0

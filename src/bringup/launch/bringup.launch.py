@@ -15,7 +15,7 @@ def generate_launch_description():
     """定义LaunchDescription对象"""
     ld = LaunchDescription()
 
-    """定位功能包"""
+    """定位功能包路径"""
     rplidar_path = get_package_share_directory('sllidar_ros2')
     merger_path = get_package_share_directory('ros2_laser_scan_merger')
     matcher_path = get_package_share_directory('ros2_laser_scan_matcher')
@@ -26,10 +26,13 @@ def generate_launch_description():
     matcher_node_path = os.path.join(matcher_path, 'src')
 
     """添加launch文件"""
-    anotherlaunch = IncludeLaunchDescription(
+    rpliarlaunch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(rpliadar_launch_path, 'sllidar_s1_launch.py')
-        ),
+        ),    
+            # launch_arguments={'arg-name': example-arg}.items()
+    )
+    mergerlaunch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(merger_launch_path, 'merge_2_scan.launch.py')
         ),      
@@ -37,10 +40,11 @@ def generate_launch_description():
     )
     """添加Node节点"""
     matcher_to_odom = Node(
-        package =  matcher_path,
+        package =  'ros2_laser_scan_matcher',
         executable = 'laser_scan_matcher' 
     )
     """添加启动项目"""
-    ld.add_action(anotherlaunch)
+    ld.add_action(rpliarlaunch)
+    ld.add_action(mergerlaunch)
     ld.add_action(matcher_to_odom)
     return ld
