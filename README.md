@@ -17,6 +17,11 @@
 > 所有代码包除作为项目库文件的包都有单独launch启动，在bringup包中有一键启动所有功能包；指令如下
 
 ```bash
+#rosdepc安装依赖 （小鱼一键安装）
+wget http://fishros.com/install -O fishros && . fishros
+rosdepc install -r --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y
+```
+```bash
 colcon build  --parallel-workers 16
 . install/setup.bash
 ros2 launch bringup bringup.launch.py
