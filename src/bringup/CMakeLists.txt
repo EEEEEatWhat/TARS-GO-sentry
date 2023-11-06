@@ -13,6 +13,8 @@ find_package(sllidar_ros2 REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(slam_gmapping REQUIRED)
+find_package(run_navigation REQUIRED)
 
 add_executable(settf src/settf.cpp)
 ament_target_dependencies(

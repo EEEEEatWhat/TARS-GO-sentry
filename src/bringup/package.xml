@@ -12,6 +12,8 @@
   <exec_depend>ros2_laser_scan_merger</exec_depend>
   <exec_depend>ros2_laser_scan_matcher</exec_depend>
   <exec_depend>sllidar_ros2</exec_depend>
+  <exec_depend>slam_gmapping</exec_depend>
+  <exec_depend>run_navigation</exec_depend>
   
   <depend>rclcpp</depend>
   <depend>tf2_ros</depend>
