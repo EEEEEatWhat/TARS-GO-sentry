@@ -21,7 +21,6 @@ def generate_launch_description():
     matcher_path = get_package_share_directory('ros2_laser_scan_matcher')
     gmapping_path = get_package_share_directory('slam_gmapping')
     runnavigation_path = get_package_share_directory('run_navigation')
-    bringup_path = get_package_share_directory('bringup')
 
     """设置所需路径"""
     rpliadar_launch_path = os.path.join(rplidar_path, 'launch')
@@ -29,7 +28,6 @@ def generate_launch_description():
     matcher_node_path = os.path.join(matcher_path, 'src')
     gmapping_launch_path = os.path.join(gmapping_path, 'launch')
     runnavigation_launch_path = os.path.join(runnavigation_path,'launch')
-    bringup_node_path = os.path.join(bringup_path,'launch')
     
     """添加launch文件"""
     rpliarlaunch = IncludeLaunchDescription(
@@ -62,13 +60,13 @@ def generate_launch_description():
         package =  'ros2_laser_scan_matcher',
         executable = 'laser_scan_matcher' 
     )
-    settf = Node(
-        package =  'bringup',
-        executable = 'settf' 
-    )    
+    # settf = Node(
+    #     package =  'bringup',
+    #     executable = 'settf' 
+    # )    
 
     """添加启动项目"""
-    ld.add_action(settf)
+    # ld.add_action(settf)
     ld.add_action(rpliarlaunch)
     ld.add_action(mergerlaunch)
     ld.add_action(matcher_to_odom)
