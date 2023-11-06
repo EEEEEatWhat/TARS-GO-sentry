@@ -60,13 +60,13 @@ def generate_launch_description():
         package =  'ros2_laser_scan_matcher',
         executable = 'laser_scan_matcher' 
     )
-    # settf = Node(
-    #     package =  'bringup',
-    #     executable = 'settf' 
-    # )    
+    settf = Node(
+        package =  'bringup',
+        executable = 'settf' 
+    )    
 
     """添加启动项目"""
-    # ld.add_action(settf)
+    ld.add_action(settf)
     ld.add_action(rpliarlaunch)
     ld.add_action(mergerlaunch)
     ld.add_action(matcher_to_odom)
