@@ -15,63 +15,63 @@ def generate_launch_description():
     """定义LaunchDescription对象"""
     ld = LaunchDescription()
 
-    """定位功能包路径"""
-    rplidar_path = get_package_share_directory('sllidar_ros2')
-    merger_path = get_package_share_directory('ros2_laser_scan_merger')
-    matcher_path = get_package_share_directory('ros2_laser_scan_matcher')
-    gmapping_path = get_package_share_directory('slam_gmapping')
-    runnavigation_path = get_package_share_directory('run_navigation')
+    """定位功能包package路径"""
+    rplidar_package = get_package_share_directory('sllidar_ros2')
+    merger_package = get_package_share_directory('ros2_laser_scan_merger')
+    matcher_package = get_package_share_directory('ros2_laser_scan_matcher')
+    gmapping_package = get_package_share_directory('slam_gmapping')
+    runnavigation_package = get_package_share_directory('run_navigation')
 
-    """设置所需路径"""
-    rpliadar_launch_path = os.path.join(rplidar_path, 'launch')
-    merger_launch_path = os.path.join(merger_path, 'launch')
-    matcher_node_path = os.path.join(matcher_path, 'src')
-    gmapping_launch_path = os.path.join(gmapping_path, 'launch')
-    runnavigation_launch_path = os.path.join(runnavigation_path,'launch')
+    """设置所需dir路径"""
+    rpliadar_launch_dir = os.path.join(rplidar_package, 'launch')
+    merger_launch_dir = os.path.join(merger_package, 'launch')
+    matcher_node_dir = os.path.join(matcher_package, 'src')
+    gmapping_launch_dir = os.path.join(gmapping_package, 'launch')
+    runnavigation_launch_dir = os.path.join(runnavigation_package,'launch')
     
-    """添加launch文件"""
-    rpliarlaunch = IncludeLaunchDescription(
+    """添加launch文件cmd"""
+    rpliarlaunch_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(rpliadar_launch_path, 'tars_lidar.launch.py')
+            os.path.join(rpliadar_launch_dir, 'tars_lidar.launch.py')
         ),    
             # launch_arguments={'arg-name': example-arg}.items()
     )
-    mergerlaunch = IncludeLaunchDescription(
+    mergerlaunch_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(merger_launch_path, 'merge_2_scan.launch.py')
+            os.path.join(merger_launch_dir, 'merge_2_scan.launch.py')
         ),      
             # launch_arguments={'arg-name': example-arg}.items()
     )
-    gmappinglaunch = IncludeLaunchDescription(
+    gmappinglaunch_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(gmapping_launch_path, 'slam_gmapping.launch.py')
+            os.path.join(gmapping_launch_dir, 'slam_gmapping.launch.py')
         ),      
             # launch_arguments={'arg-name': example-arg}.items()
     )
-    runnavigationlaunch = IncludeLaunchDescription(
+    runnavigationlaunch_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(runnavigation_launch_path, 'run_navigation2.launch.py')
+            os.path.join(runnavigation_launch_dir, 'run_navigation2.launch.py')
         ),      
             # launch_arguments={'arg-name': example-arg}.items()
     )
 
-    """添加Node节点"""
-    matcher_to_odom = Node(
+    """添加Node节点cmd"""
+    matcher_to_odom_cmd = Node(
         package =  'ros2_laser_scan_matcher',
         executable = 'laser_scan_matcher' 
     )
-    settf = Node(
+    settf_cmd = Node(
         package =  'bringup',
         executable = 'settf' 
     )    
 
     """添加启动项目"""
-    ld.add_action(settf)
-    ld.add_action(rpliarlaunch)
-    ld.add_action(mergerlaunch)
-    ld.add_action(matcher_to_odom)
-    # ld.add_action(gmappinglaunch)
-    # ld.add_action(runnavigationlaunch)
+    ld.add_action(settf_cmd)
+    ld.add_action(rpliarlaunch_cmd)
+    ld.add_action(mergerlaunch_cmd)
+    ld.add_action(matcher_to_odom_cmd)
+    # ld.add_action(gmappinglaunch_cmd)
+    # ld.add_action(runnavigationlaunch_cmd)
 
 
     return ld
