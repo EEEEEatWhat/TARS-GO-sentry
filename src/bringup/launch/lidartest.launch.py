@@ -70,8 +70,8 @@ def generate_launch_description():
     ld.add_action(rpliarlaunch)
     ld.add_action(mergerlaunch)
     ld.add_action(matcher_to_odom)
-    ld.add_action(gmappinglaunch)
-    ld.add_action(runnavigationlaunch)
+    # ld.add_action(gmappinglaunch)
+    # ld.add_action(runnavigationlaunch)
 
 
     return ld
