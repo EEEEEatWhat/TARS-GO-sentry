@@ -21,6 +21,7 @@ def generate_launch_description():
     matcher_package = get_package_share_directory('ros2_laser_scan_matcher')
     gmapping_package = get_package_share_directory('slam_gmapping')
     runnavigation_package = get_package_share_directory('run_navigation')
+    bringup_package = get_package_share_directory('bringup')
 
     """设置所需dir路径"""
     rpliadar_launch_dir = os.path.join(rplidar_package, 'launch')
@@ -28,7 +29,8 @@ def generate_launch_description():
     matcher_node_dir = os.path.join(matcher_package, 'src')
     gmapping_launch_dir = os.path.join(gmapping_package, 'launch')
     runnavigation_launch_dir = os.path.join(runnavigation_package,'launch')
-    
+    rviz_config_dir = os.path.join(bringup_package,'rviz','rviz_config.rviz')
+
     """添加launch文件cmd"""
     rpliarlaunch_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -64,7 +66,14 @@ def generate_launch_description():
         package =  'bringup',
         executable = 'settf' 
     )    
-
+    rviz_cmd = Node(
+        package='rviz2',
+        executable='rviz2',
+        name='rviz2',
+        arguments=['-d', rviz_config_dir],
+        output='screen'
+    )
+    
     """添加启动项目"""
     ld.add_action(settf_cmd)
     ld.add_action(rpliarlaunch_cmd)
@@ -72,6 +81,6 @@ def generate_launch_description():
     ld.add_action(matcher_to_odom_cmd)
     ld.add_action(gmappinglaunch_cmd)
     ld.add_action(runnavigationlaunch_cmd)
-
+    ld.add_action(rviz_cmd)
 
     return ld

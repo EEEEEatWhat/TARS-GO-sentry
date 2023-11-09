@@ -15,6 +15,7 @@ find_package(tf2_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(slam_gmapping REQUIRED)
 find_package(run_navigation REQUIRED)
+find_package(rviz2 REQUIRED)
 
 add_executable(settf src/settf.cpp)
 ament_target_dependencies(

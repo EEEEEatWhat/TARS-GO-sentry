@@ -14,6 +14,7 @@
   <exec_depend>sllidar_ros2</exec_depend>
   <exec_depend>slam_gmapping</exec_depend>
   <exec_depend>run_navigation</exec_depend>
+  <exec_depend>rviz2</exec_depend>
   
   <depend>rclcpp</depend>
   <depend>tf2_ros</depend>
