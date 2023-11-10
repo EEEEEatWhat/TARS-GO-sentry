@@ -10,14 +10,14 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 '''端口号已经被固定为A2_rplidar S1_rplidar如果无法找着雷达请查询.rules文件'''
-'''该launch是一个A2和一个S1'''
+'''该launch是两个A2'''
 def generate_launch_description():
     channel_type =  LaunchConfiguration('channel_type', default='serial')
     A2_serial_port = LaunchConfiguration('serial_port', default='/dev/A2_rplidar')
     A2_serial_baudrate = LaunchConfiguration('serial_baudrate', default='115200')
 
     S1_serial_port = LaunchConfiguration('serial_port', default='/dev/S1_rplidar')
-    S1_serial_baudrate = LaunchConfiguration('serial_baudrate', default='256000')
+    S1_serial_baudrate = LaunchConfiguration('serial_baudrate', default='115200')
     frame_id = LaunchConfiguration('frame_id', default='laser')
     inverted = LaunchConfiguration('inverted', default='false')
     angle_compensate = LaunchConfiguration('angle_compensate', default='true')
