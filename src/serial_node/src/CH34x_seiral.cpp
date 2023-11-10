@@ -36,43 +36,41 @@ typedef struct serial_node{
 class SerialNode : public rclcpp::Node
 {
 public:
-  SerialNode(const std::string serial_port)
-    : Node("serial_node"),
-      io_service_(),
-      serial_(io_service_,serial_port)
-  {
-    // 打开串口
-    // serial_.open(port);
-    // 配置串口参数
-    serial_.set_option(asio::serial_port_base::baud_rate(115200));
-    serial_.set_option(asio::serial_port_base::character_size(8));
-    serial_.set_option(asio::serial_port_base::parity(asio::serial_port_base::parity::none));
-    serial_.set_option(asio::serial_port_base::stop_bits(asio::serial_port_base::stop_bits::one));
+    SerialNode(const std::string serial_port)
+    :   Node("serial_node"),
+        io_service_(),
+        serial_(io_service_,serial_port)
+    {
+        // 打开串口
+        // serial_.open(port);
+        // 配置串口参数
+        serial_.set_option(asio::serial_port_base::baud_rate(115200));
+        serial_.set_option(asio::serial_port_base::character_size(8));
+        serial_.set_option(asio::serial_port_base::parity(asio::serial_port_base::parity::none));
+        serial_.set_option(asio::serial_port_base::stop_bits(asio::serial_port_base::stop_bits::one));
 
-    // 创建发布者
-    // publisher_ = this->create_publisher<std_msgs::msg::String>("serial_data", 10);
+        // 创建发布者
+        // publisher_ = this->create_publisher<std_msgs::msg::String>("serial_data", 10);
 
-    // 创建订阅者
-    subscriber_ = this->create_subscription<geometry_msgs::msg::Twist>(
-      "cmd_vel",10,std::bind(&SerialNode::topicCallback, this, std::placeholders::_1));
+        // 创建订阅者
+        subscriber_ = this->create_subscription<geometry_msgs::msg::Twist>(
+        "cmd_vel",10,std::bind(&SerialNode::topicCallback, this, std::placeholders::_1));
 
-    // 创建定时器，定时读取串口数据
-    timer_ = this->create_wall_timer(std::chrono::milliseconds(100),
-      std::bind(&SerialNode::readSerialData, this));
-  }
+        // 创建定时器，定时读取串口数据
+        timer_ = this->create_wall_timer(std::chrono::milliseconds(100),
+        std::bind(&SerialNode::readSerialData, this));
+    }
 
 private:
-  void topicCallback(const geometry_msgs::msg::Twist::SharedPtr msg)
-  {
+void topicCallback(const geometry_msgs::msg::Twist::SharedPtr msg){
     serial_msg.self_data.vxw_ROS = msg->linear.x;
     serial_msg.self_data.vyw_ROS = msg->linear.y;
     serial_msg.self_data.vzw_ROS = msg->angular.z;
     asio::write(serial_, asio::buffer(&serial_msg, sizeof(serial_msg)));
     std::this_thread::sleep_for(std::chrono::seconds(1));
-  }
+}
 
-  void readSerialData()
-  {
+void readSerialData(){
     // // 读取串口数据
     // asio::streambuf buffer;
     // asio::read_until(serial_, buffer, '\n');
@@ -88,21 +86,21 @@ private:
     // auto msg = std::make_shared<std_msgs::msg::String>();
     // msg->data = data;
     // publisher_->publish(*msg);
-  }
+}
 
-  Serial_Node serial_msg;
-  asio::io_service io_service_;
-  asio::serial_port serial_;
-  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-  rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscriber_;
-  rclcpp::TimerBase::SharedPtr timer_;
+    Serial_Node serial_msg;
+    asio::io_service io_service_;
+    asio::serial_port serial_;
+    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
+    rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscriber_;
+    rclcpp::TimerBase::SharedPtr timer_;
 };
 
 int main(int argc, char** argv)
 {
-  rclcpp::init(argc, argv);
-  auto node = std::make_shared<SerialNode>("/dev/ttyACM0");
-  rclcpp::spin(node);
-  rclcpp::shutdown();
-  return 0;
+    rclcpp::init(argc, argv);
+    auto node = std::make_shared<SerialNode>("/dev/ttyACM0");
+    rclcpp::spin(node);
+    rclcpp::shutdown();
+    return 0;
 }
