@@ -2,36 +2,36 @@
 #include <asio.hpp>
 #include <thread>
 #include <random>
-    //定义一个结构体
-    #pragma pack(1)
-    typedef struct serial_node{
-        uint8_t head_frame;
-        uint8_t head_frame_id;
-        struct {
-            //自身参数
-            float bllistic;							//弹道系数			
-            float current_v;						//当前自身弹速
-            float current_pitch;					//当前自身pitch	
-            float current_yaw;						//当前自身yaw
-            float xw_ROS;							//ROS坐标系下的位置x	
-            float yw_ROS;							//ROS坐标系下的位置y
-            float zw_ROS;							//ROS坐标系下的位置z
-            float vxw_ROS;							//ROS坐标系下的vx
-            float vyw_ROS;							//ROS坐标系下的vy	
-            float vzw_ROS;							//ROS坐标系下的vz
-        }self_data;
-        struct {
-            //目标参数
-            float tar_yaw;							//目标yaw	
-            float tar_v_yaw;						//目标yaw速度
-            float bias_time;						//偏置时间
-            float s_bias;							//枪口前推的距离
-            float yaw_to_s_bias;					//yaw轴电机到枪口水平面的垂直距离
-            uint8_t armor_type;						//RIGO:装甲板类型，1为平衡步兵（两块大装甲板），否则为四装甲板
-        }target_data;
-            uint8_t rx_end;							//帧尾
-    }Serial_Node;
-    #pragma pack()
+//定义一个结构体
+#pragma pack(1)
+typedef struct serial_node{
+    uint8_t head_frame;
+    uint8_t head_frame_id;
+    struct {
+        //自身参数
+        float bllistic;							//弹道系数			
+        float current_v;						//当前自身弹速
+        float current_pitch;					//当前自身pitch	
+        float current_yaw;						//当前自身yaw
+        float xw_ROS;							//ROS坐标系下的位置x	
+        float yw_ROS;							//ROS坐标系下的位置y
+        float zw_ROS;							//ROS坐标系下的位置z
+        float vxw_ROS;							//ROS坐标系下的vx
+        float vyw_ROS;							//ROS坐标系下的vy	
+        float vzw_ROS;							//ROS坐标系下的vz
+    }self_data;
+    struct {
+        //目标参数
+        float tar_yaw;							//目标yaw	
+        float tar_v_yaw;						//目标yaw速度
+        float bias_time;						//偏置时间
+        float s_bias;							//枪口前推的距离
+        float yaw_to_s_bias;					//yaw轴电机到枪口水平面的垂直距离
+        uint8_t armor_type;						//RIGO:装甲板类型，1为平衡步兵（两块大装甲板），否则为四装甲板
+    }target_data;
+        uint8_t rx_end;							//帧尾
+}Serial_Node;
+#pragma pack()
 void writeSerial(asio::serial_port& serialPort) {
     std::random_device rd;
     std::mt19937 gen(rd());
