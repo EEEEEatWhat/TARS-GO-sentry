@@ -10,6 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 add_executable(serial_node src/serial_node.cpp)
 ament_target_dependencies(
@@ -30,10 +31,18 @@ ament_target_dependencies(
   "rclcpp"
   "std_msgs"
 )
+add_executable(CH34x_serial src/CH34x_seiral.cpp)
+ament_target_dependencies(
+  CH34x_serial
+  "rclcpp"
+  "std_msgs"
+  geometry_msgs
+)
 install(TARGETS 
   serial_node
   serial_node2
   serial_node3
+  CH34x_serial
   DESTINATION lib/${PROJECT_NAME})
 
 install(DIRECTORY launch config
