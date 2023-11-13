@@ -34,7 +34,7 @@ def generate_launch_description():
     """添加launch文件cmd"""
     rpliarlaunch_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(rpliadar_launch_dir, 'tars_lidar.launch.py')
+            os.path.join(rpliadar_launch_dir, 'tars_lidar_a2.launch.py')
         ),    
             # launch_arguments={'arg-name': example-arg}.items()
     )
@@ -60,11 +60,13 @@ def generate_launch_description():
     """添加Node节点cmd"""
     matcher_to_odom_cmd = Node(
         package =  'ros2_laser_scan_matcher',
-        executable = 'laser_scan_matcher' 
+        executable = 'laser_scan_matcher',
+        output='screen'
     )
     settf_cmd = Node(
         package =  'bringup',
-        executable = 'settf' 
+        executable = 'settf' ,
+        output='screen'
     )    
     rviz_cmd = Node(
         package='rviz2',
@@ -73,14 +75,20 @@ def generate_launch_description():
         arguments=['-d', rviz_config_dir],
         output='screen'
     )
+    serial_cmd = Node(
+        package= 'serial_node',
+        executable= 'CH34x_serial',
+        output='screen'
+    )
     
     """添加启动项目"""
     ld.add_action(settf_cmd)
     ld.add_action(rpliarlaunch_cmd)
     ld.add_action(mergerlaunch_cmd)
     ld.add_action(matcher_to_odom_cmd)
+    ld.add_action(serial_cmd)
     ld.add_action(gmappinglaunch_cmd)
-    ld.add_action(runnavigationlaunch_cmd)
-    ld.add_action(rviz_cmd)
+    # ld.add_action(runnavigationlaunch_cmd)
+    # ld.add_action(rviz_cmd)
 
     return ld

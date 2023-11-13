@@ -88,7 +88,7 @@ def generate_launch_description():
     ld.add_action(matcher_to_odom_cmd)
     ld.add_action(serial_cmd)
     ld.add_action(gmappinglaunch_cmd)
-    ld.add_action(runnavigationlaunch_cmd)
-    ld.add_action(rviz_cmd)
+    # ld.add_action(runnavigationlaunch_cmd)
+    # ld.add_action(rviz_cmd)
 
     return ld
