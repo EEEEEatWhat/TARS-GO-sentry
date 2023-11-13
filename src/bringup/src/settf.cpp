@@ -11,20 +11,20 @@ int main(int argc, char * argv[])
     auto static_broadcaster = std::make_shared<tf2_ros::StaticTransformBroadcaster>(node);
     
     geometry_msgs::msg::TransformStamped static_transformStamped;
-    while(rclcpp::ok())
-    {    
-        static_transformStamped.header.stamp = node->now();
-        static_transformStamped.header.frame_id = "base_link";
-        static_transformStamped.child_frame_id = "laser";
-        static_transformStamped.transform.translation.x = 0.0;
-        static_transformStamped.transform.translation.y = 0.0;
-        static_transformStamped.transform.translation.z = 0.0;
-        static_transformStamped.transform.rotation.x = 0.0;
-        static_transformStamped.transform.rotation.y = 0.0;
-        static_transformStamped.transform.rotation.z = 0.0;
-        static_transformStamped.transform.rotation.w = 1.0;
+    static_transformStamped.header.stamp = rclcpp::Time(0);
+    // static_transformStamped.header.stamp = node->get_clock()->now();
+    static_transformStamped.header.frame_id = "base_link";
+    static_transformStamped.child_frame_id = "laser";
+    static_transformStamped.transform.translation.x = 0.0;
+    static_transformStamped.transform.translation.y = 0.0;
+    static_transformStamped.transform.translation.z = 0.0;
+    static_transformStamped.transform.rotation.x = 0.0;
+    static_transformStamped.transform.rotation.y = 0.0;
+    static_transformStamped.transform.rotation.z = 0.0;
+    static_transformStamped.transform.rotation.w = 1.0;
+    while(rclcpp::ok()){    
         static_broadcaster->sendTransform(static_transformStamped);
-        rclcpp::sleep_for(std::chrono::seconds(1));
+        rclcpp::sleep_for(std::chrono::seconds(3));
     }
     rclcpp::spin(node);
     rclcpp::shutdown();
