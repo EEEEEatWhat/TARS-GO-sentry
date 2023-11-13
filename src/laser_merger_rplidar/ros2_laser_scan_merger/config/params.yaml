@@ -6,17 +6,17 @@
     laser1B: 0
     laser1G: 0
     laser1R: 255
-    laser1XOff: 0.0
-    laser1YOff: 0.0
+    laser1XOff: -0.21
+    laser1YOff: -0.02
     laser1ZOff: 0.0
-    laser2Alpha: 0.0
+    laser2Alpha: 180.0
     laser2AngleMax: 181.0
     laser2AngleMin: -181.0
     laser2B: 255
     laser2G: 0
     laser2R: 0
-    laser2XOff: 0.0
-    laser2YOff: 0.0
+    laser2XOff: 0.21
+    laser2YOff: 0.02
     laser2ZOff: 0.0
     pointCloudTopic: cloud_in
     pointCloutFrameId: laser
