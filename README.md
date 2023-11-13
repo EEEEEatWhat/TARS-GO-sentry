@@ -51,3 +51,9 @@ colcon build  --parallel-workers 16
 . install/setup.bash
 ros2 launch bringup bringup.launch.py
 ```
+## TODO
+- [x] 固定端口号
+- [ ] 2D建图功能(gmapping)正常
+- [ ] Cartograph 支持
+- [ ] Navgation2 Sack 正常
+- [ ] Nav2 支持阿克曼底盘、TEB
