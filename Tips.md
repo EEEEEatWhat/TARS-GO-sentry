@@ -2,6 +2,13 @@
 * 雷达一次起不来,需要多次启动
 
 * VNC切换网络容易黑屏，但是接显示屏又正常
+# 小妙招之常用指令
+```bash
+colcon build  --parallel-workers 16
+. install/setup.bash
+# 保存地图
+ros2 run map_server map_saver -f <map_file_name>
+```
 # 小妙招之固定端口号:
 ## 给予USB永久权限
 
