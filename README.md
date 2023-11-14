@@ -53,7 +53,9 @@ ros2 launch bringup bringup.launch.py
 ```
 ## TODO
 - [x] 固定端口号
-- [ ] 2D建图功能(gmapping)正常
+- [x] 2D建图功能(gmapping) 正常
+- [x] Navgation2 Sack 正常
+- [x] 单片机串口通信 正常
+- [x] Nav2 location融合imu/odometry
 - [ ] Cartograph 支持
-- [ ] Navgation2 Sack 正常
-- [ ] Nav2 支持阿克曼底盘、TEB
+- [ ] Nav2 阿克曼底盘、TEB 支持
