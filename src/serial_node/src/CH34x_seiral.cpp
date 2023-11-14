@@ -41,31 +41,29 @@ public:
         io_service_(),
         serial_(io_service_,serial_port)
     {
-        // 打开串口
+        serial_msg.head_frame = 0x5A;
+        serial_msg.rx_end = 0x4A;
         // serial_.open(port);
-        // 配置串口参数
         serial_.set_option(asio::serial_port_base::baud_rate(115200));
         serial_.set_option(asio::serial_port_base::character_size(8));
         serial_.set_option(asio::serial_port_base::parity(asio::serial_port_base::parity::none));
         serial_.set_option(asio::serial_port_base::stop_bits(asio::serial_port_base::stop_bits::one));
 
-        // 创建发布者
         // publisher_ = this->create_publisher<std_msgs::msg::String>("serial_data", 10);
 
-        // 创建订阅者
         subscriber_ = this->create_subscription<geometry_msgs::msg::Twist>(
         "cmd_vel",10,std::bind(&SerialNode::topicCallback, this, std::placeholders::_1));
 
-        // 创建定时器，定时读取串口数据
         timer_ = this->create_wall_timer(std::chrono::milliseconds(100),
         std::bind(&SerialNode::readSerialData, this));
     }
 
 private:
 void topicCallback(const geometry_msgs::msg::Twist::SharedPtr msg){
-    serial_msg.self_data.vxw_ROS = msg->linear.x;
-    serial_msg.self_data.vyw_ROS = msg->linear.y;
-    serial_msg.self_data.vzw_ROS = msg->angular.z;
+    //X Y 数值对调 X Y W 数值反了
+    serial_msg.self_data.vxw_ROS = -msg->linear.y;
+    serial_msg.self_data.vyw_ROS = -msg->linear.x;
+    serial_msg.self_data.vzw_ROS = -msg->angular.z;
     asio::write(serial_, asio::buffer(&serial_msg, sizeof(serial_msg)));
     std::this_thread::sleep_for(std::chrono::seconds(1));
 }
