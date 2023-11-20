@@ -102,3 +102,25 @@ int main(int argc, char** argv)
     rclcpp::shutdown();
     return 0;
 }
+typedef struct Sentry_value{
+ struct{             //哨兵所有的速度值
+  float yaw;                    //yaw轴转动速度         
+  float pitch;                  //pitch轴转动速度
+  float shoot;                  //摩擦轮发射速度
+  float magazine;               //弹仓发弹频率/速度
+  float chassis_vx;             //底盘沿着x轴的速度分量
+  float chassis_vy;             //底盘沿着y轴的速度分量
+  float chassis_w;              //底盘的角速度
+  float jy901s_vyaw;            //jy901s的yaw轴角速度
+ }s_speed;
+ struct{             //哨兵所有的角度值
+  float yaw_jy901s;             //jy901s陀螺仪对应yaw轴角度
+  float yaw_jy901s_last;        //用于过零检测的上一次角度值
+  float yaw_jy901s_total;       //用于过零检测的总角度值
+  float pitch_jy901s;           //jy901s陀螺仪对应pitch轴角度
+  float roll_jy901s;            //jy901s陀螺仪对应roll轴角度
+  float yaw_motor;              //yaw轴电机编码器换算角度
+  float pitch_motor;            //pitch轴电机编码器换算角度
+  float chassis;                //通过jy901和yaw轴电机角度计算得到的底盘角度
+ }s_angle;
+}Sentry_value_t;
